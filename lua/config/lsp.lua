@@ -53,6 +53,14 @@ vim.lsp.config("nil_ls", {
 })
 vim.lsp.enable("nil_ls")
 
+local arduino_lsp = "arduino-language-server"
+vim.lsp.config(arduino_lsp, {
+	cmd = GetLsp(arduino_lsp),
+	filetypes = { "ino", "arduino" },
+	capabilities = caps,
+})
+vim.lsp.enable(arduino_lsp)
+
 -- Inlay hints
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(event)
