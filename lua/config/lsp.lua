@@ -22,13 +22,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 local caps = require("cmp_nvim_lsp").default_capabilities()
 
-function GetLsp(lsp_name)
-	local mason_bin = vim.fn.stdpath("data") .. "/mason/bin"
-	return mason_bin .. "/" .. lsp_name
+local function GetLsp(bin)
+	return vim.fn.stdpath("data") .. "/mason/bin/" .. bin
 end
 
 vim.lsp.config("lua_ls", {
 	cmd = { GetLsp("lua-language-server") },
+	filetypes = { "lua" },
 	capabilities = caps,
 	settings = {
 		Lua = {
@@ -40,17 +40,23 @@ vim.lsp.config("lua_ls", {
 vim.lsp.enable("lua_ls")
 
 vim.lsp.config("ts_ls", {
-	cmd = { GetLsp("typescript-language-server") .. "--stdio" },
+	cmd = { GetLsp("typescript-language-server"), "--stdio" },
+	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 	capabilities = caps,
 })
 vim.lsp.enable("ts_ls")
+
+vim.lsp.config("nil_ls", {
+	cmd = { GetLsp("nil") },
+	filetypes = { "nix" },
+	capabilities = caps,
+})
+vim.lsp.enable("nil_ls")
 
 -- Inlay hints
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(event)
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
-
-		-- keymaps you already have...
 
 		-- Inlay hints (if supported by this Neovim + server)
 		if vim.lsp.inlay_hint and client and client.supports_method("textDocument/inlayHint") then

@@ -159,7 +159,7 @@ require("lazy").setup({
 						{
 							function()
 								local clients = vim.lsp.get_clients({ bufnr = 0 })
-								return (#clients > 0) and ("LSP:" .. clients[1].name) or ""
+								return (#clients > 0) and ("󰫹󰬀󰫽  " .. clients[1].name) or "" -- LSP indicator bottom right
 							end,
 						},
 					},
@@ -167,6 +167,13 @@ require("lazy").setup({
 					lualine_z = { "location" },
 				},
 			})
+		end,
+	},
+	{
+		"echasnovski/mini.ai",
+		version = false,
+		config = function()
+			require("mini.ai").setup()
 		end,
 	},
 })
