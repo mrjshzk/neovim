@@ -55,11 +55,20 @@ vim.lsp.enable("nil_ls")
 
 local arduino_lsp = "arduino-language-server"
 vim.lsp.config(arduino_lsp, {
-	cmd = GetLsp(arduino_lsp),
+	cmd = { GetLsp(arduino_lsp) },
 	filetypes = { "ino", "arduino" },
 	capabilities = caps,
 })
 vim.lsp.enable(arduino_lsp)
+
+local qml_lsp = "qmlls"
+vim.lsp.config(qml_lsp, {
+	cmd = { "qmlls", "-E" },
+	filetypes = { "qml", "qmljs" },
+	root_markers = { ".git" },
+	capabilities = caps,
+})
+vim.lsp.enable(qml_lsp)
 
 -- Inlay hints
 vim.api.nvim_create_autocmd("LspAttach", {
