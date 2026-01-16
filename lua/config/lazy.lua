@@ -75,18 +75,12 @@ require("lazy").setup({
 		end,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			-- optional but recommended
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
 	},
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
-		opts = {
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
-		},
 		keys = {
 			{
 				"<leader>?",
@@ -159,7 +153,7 @@ require("lazy").setup({
 						{
 							function()
 								local clients = vim.lsp.get_clients({ bufnr = 0 })
-								return (#clients > 0) and ("󰫹󰬀󰫽  " .. clients[1].name) or "" -- LSP indicator bottom right
+								return (#clients > 0) and ("󰫹󰬀󰫽  " .. clients[1].name) or "No LSP. :("
 							end,
 						},
 					},
@@ -175,5 +169,28 @@ require("lazy").setup({
 		config = function()
 			require("mini.ai").setup()
 		end,
+	},
+	{
+		"nvim-tree/nvim-tree.lua",
+		lazy = false,
+	},
+	{
+		"yuukiflow/Arduino-Nvim",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"neovim/nvim-lspconfig",
+		},
+		config = function()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "arduino",
+				callback = function()
+					require("Arduino-Nvim")
+				end,
+			})
+		end,
+	},
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 })

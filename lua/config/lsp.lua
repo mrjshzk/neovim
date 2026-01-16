@@ -53,13 +53,7 @@ vim.lsp.config("nil_ls", {
 })
 vim.lsp.enable("nil_ls")
 
-local arduino_lsp = "arduino-language-server"
-vim.lsp.config(arduino_lsp, {
-	cmd = { GetLsp(arduino_lsp) },
-	filetypes = { "ino", "arduino" },
-	capabilities = caps,
-})
-vim.lsp.enable(arduino_lsp)
+vim.lsp.enable("arduino-language-server")
 
 local qml_lsp = "qmlls"
 vim.lsp.config(qml_lsp, {

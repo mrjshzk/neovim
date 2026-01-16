@@ -1,6 +1,7 @@
 local map = vim.keymap.set
 
 -- better escape
+map("i", "jj", "<Esc>")
 map("i", "jk", "<Esc>")
 
 -- clear search highlight
@@ -17,6 +18,9 @@ map("n", "<C-Up>", ":resize -2<CR>")
 map("n", "<C-Down>", ":resize +2<CR>")
 map("n", "<C-Left>", ":vertical resize -2<CR>")
 map("n", "<C-Right>", ":vertical resize +2<CR>")
+
+-- Filetree keymaps
+vim.keymap.set("n", "<leader>tf", "<CMD>NvimTreeToggle<CR>", { desc = "Toggle file tree" })
 
 -- telescope keymaps
 local builtin = require("telescope.builtin")

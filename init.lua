@@ -11,6 +11,7 @@ require("config.lsp")
 require("config.telescope")
 require("config.treesitter")
 require("config.diagnostics")
+require("config.filetree")
 
 require("config.options")
 require("config.keymaps")
