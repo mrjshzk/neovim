@@ -3,6 +3,7 @@ local map = vim.keymap.set
 -- better escape
 map("i", "jj", "<Esc>")
 map("i", "jk", "<Esc>")
+map("i", "kj", "<Esc>")
 
 -- clear search highlight
 map("n", "<leader>h", ":nohlsearch<CR>")
