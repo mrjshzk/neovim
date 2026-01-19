@@ -89,6 +89,9 @@ require("lazy").setup({
 				end,
 				desc = "Buffer Local Keymaps (which-key)",
 			},
+			options = {
+				delay = 0,
+			},
 		},
 	},
 	{
