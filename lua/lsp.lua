@@ -117,6 +117,13 @@ vim.lsp.config["gopls"] = {
 	},
 }
 
+vim.lsp.config["tinymist"] = {
+	cmd = { "tinymist" },
+	filetypes = { "typst" },
+	root_markers = { ".git" },
+}
+vim.lsp.enable("tinymist")
+
 ---@diagnostic disable-next-line: invisible
 for name, _ in pairs(vim.lsp.config._configs) do
 	if name ~= "*" then -- Skip the wildcard config

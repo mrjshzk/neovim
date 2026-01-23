@@ -80,6 +80,10 @@
       "rev": "04b808e9769ded988089772ffcaf08d92d75d927",
       "src": "https://github.com/aktersnurra/no-clown-fiesta.nvim"
     },
+    "typst-preview.nvim": {
+      "rev": "bf5d5eaf23bbfcca9f98a24ed29bd084abf89bf2",
+      "src": "https://github.com/chomosuke/typst-preview.nvim"
+    },
     "vim-moonfly-colors": {
       "rev": "d11b3d04cc1cb71a778d67a4df73283a5a6d66f4",
       "src": "https://github.com/bluz71/vim-moonfly-colors"
