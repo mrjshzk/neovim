@@ -8,8 +8,13 @@ conform.setup({
 		rust = { "rustfmt", lsp_format = "fallback" },
 		-- Conform will run the first available formatter
 		javascript = { "prettierd", "prettier", stop_after_first = true },
+<<<<<<< HEAD
 		html = { "prettierd", "prettier", stop_after_first = true },
 		typst = { "typstyle" },
+=======
+		godot = { "gdformat" },
+		gdscript = { "gdformat" },
+>>>>>>> 4c97e6ed9780bd119952638b1b0051c5f1a74936
 	},
 })
 

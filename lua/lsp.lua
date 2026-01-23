@@ -23,6 +23,13 @@ vim.lsp.config["luals"] = {
 		},
 	},
 }
+vim.lsp.config("pylsp", {
+	cmd = { "pylsp" },
+	filetypes = { "python" },
+	{ "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" },
+})
+
+vim.lsp.enable("pylsp")
 
 vim.lsp.config["cssls"] = {
 	cmd = { "vscode-css-language-server", "--stdio" },
@@ -123,6 +130,26 @@ vim.lsp.config["tinymist"] = {
 	root_markers = { ".git" },
 }
 vim.lsp.enable("tinymist")
+-- Text Editor > Behavior
+--
+-- Auto Reload Scripts on External Change to On
+--
+-- Text Editor > External
+--
+-- Exec Path : /path/to/nvim
+--
+-- Exec Flags: --server /tmp/godot.pipe --remote-send "<esc>:n {file}<CR>:call cursor({line},{col})<CR>"
+--
+-- Use External Editor: On
+vim.lsp.config["gdscript"] = {
+	cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
+	filetypes = { "gd", "gdscript", "gdscript3" },
+	root_markers = { "project.godot", ".git" },
+	on_init = function(client, init_result)
+		vim.fn.serverstart("/tmp/godot.pipe")
+	end,
+}
+vim.lsp.enable("gdscript")
 
 ---@diagnostic disable-next-line: invisible
 for name, _ in pairs(vim.lsp.config._configs) do
