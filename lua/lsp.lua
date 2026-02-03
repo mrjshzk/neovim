@@ -151,6 +151,31 @@ vim.lsp.config["gdscript"] = {
 }
 vim.lsp.enable("gdscript")
 
+vim.lsp.config["csharp_ls"] = {
+	cmd = function(dispatchers, config)
+		return vim.lsp.rpc.start({ "csharp-ls" }, dispatchers, {
+			-- csharp-ls attempt to locate sln, slnx or csproj files from cwd, so set cwd to root directory.
+			-- If cmd_cwd is provided, use it instead.
+			cwd = config.cmd_cwd or config.root_dir,
+			env = config.cmd_env,
+			detached = config.detached,
+		})
+	end,
+	root_dir = function(bufnr, on_dir)
+		local fname = vim.api.nvim_buf_get_name(bufnr)
+		on_dir(
+			util.root_pattern("*.sln")(fname)
+				or util.root_pattern("*.slnx")(fname)
+				or util.root_pattern("*.csproj")(fname)
+		)
+	end,
+	filetypes = { "cs" },
+	init_options = {
+		AutomaticWorkspaceInit = true,
+	},
+}
+vim.lsp.enable("csharp_ls")
+
 ---@diagnostic disable-next-line: invisible
 for name, _ in pairs(vim.lsp.config._configs) do
 	if name ~= "*" then -- Skip the wildcard config
