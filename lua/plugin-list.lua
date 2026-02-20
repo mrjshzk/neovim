@@ -8,6 +8,7 @@ vim.pack.add({
 	"https://github.com/stevearc/conform.nvim",
 	"https://github.com/NeogitOrg/neogit",
 	"https://github.com/chomosuke/typst-preview.nvim",
+	"https://github.com/datsfilipe/vesper.nvim.git",
 })
 
-vim.cmd("colorscheme carbonfox")
+vim.cmd("colorscheme vesper")

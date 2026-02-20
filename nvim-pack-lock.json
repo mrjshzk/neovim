@@ -84,6 +84,10 @@
       "rev": "bf5d5eaf23bbfcca9f98a24ed29bd084abf89bf2",
       "src": "https://github.com/chomosuke/typst-preview.nvim"
     },
+    "vesper.nvim": {
+      "rev": "1717b1ad657c94bec3fc2bdebb0c55452d9fe46d",
+      "src": "https://github.com/datsfilipe/vesper.nvim.git"
+    },
     "vim-moonfly-colors": {
       "rev": "d11b3d04cc1cb71a778d67a4df73283a5a6d66f4",
       "src": "https://github.com/bluz71/vim-moonfly-colors"
