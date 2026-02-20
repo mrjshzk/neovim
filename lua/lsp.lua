@@ -149,6 +149,39 @@ vim.lsp.config["gdscript"] = {
 }
 vim.lsp.enable("gdscript")
 
+vim.lsp.config["docker_language_server"] = {
+	cmd = { "docker-language-server", "start", "--stdio" },
+	filetypes = { "dockerfile", "yaml.docker-compose" },
+	get_language_id = function(_, ftype)
+		if ftype == "yaml.docker-compose" or ftype:lower():find("ya?ml") then
+			return "dockercompose"
+		else
+			return ftype
+		end
+	end,
+	root_markers = {
+		"Dockerfile",
+		"docker-compose.yaml",
+		"docker-compose.yml",
+		"compose.yaml",
+		"compose.yml",
+		"docker-bake.json",
+		"docker-bake.hcl",
+		"docker-bake.override.json",
+		"docker-bake.override.hcl",
+	},
+}
+vim.lsp.enable("docker_language_server")
+-- hack for docker lsp bruh
+local function set_filetype(pattern, filetype)
+	vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+		pattern = pattern,
+		command = "set filetype=" .. filetype,
+	})
+end
+
+set_filetype({ "docker-compose.yml" }, "yaml.docker-compose")
+
 vim.diagnostic.config({
 	virtual_text = true,
 })
