@@ -1,3 +1,4 @@
+---@diagnostic disable: need-check-nil
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
@@ -130,51 +131,27 @@ vim.lsp.config["tinymist"] = {
 	root_markers = { ".git" },
 }
 vim.lsp.enable("tinymist")
+
 -- Text Editor > Behavior
---
 -- Auto Reload Scripts on External Change to On
---
 -- Text Editor > External
---
 -- Exec Path : /path/to/nvim
---
 -- Exec Flags: --server /tmp/godot.pipe --remote-send "<esc>:n {file}<CR>:call cursor({line},{col})<CR>"
---
 -- Use External Editor: On
 vim.lsp.config["gdscript"] = {
 	cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
 	filetypes = { "gd", "gdscript", "gdscript3" },
 	root_markers = { "project.godot", ".git" },
+	---@diagnostic disable-next-line: unused-local
 	on_init = function(client, init_result)
 		vim.fn.serverstart("/tmp/godot.pipe")
 	end,
 }
 vim.lsp.enable("gdscript")
 
-vim.lsp.config["csharp_ls"] = {
-	cmd = function(dispatchers, config)
-		return vim.lsp.rpc.start({ "csharp-ls" }, dispatchers, {
-			-- csharp-ls attempt to locate sln, slnx or csproj files from cwd, so set cwd to root directory.
-			-- If cmd_cwd is provided, use it instead.
-			cwd = config.cmd_cwd or config.root_dir,
-			env = config.cmd_env,
-			detached = config.detached,
-		})
-	end,
-	root_dir = function(bufnr, on_dir)
-		local fname = vim.api.nvim_buf_get_name(bufnr)
-		on_dir(
-			util.root_pattern("*.sln")(fname)
-				or util.root_pattern("*.slnx")(fname)
-				or util.root_pattern("*.csproj")(fname)
-		)
-	end,
-	filetypes = { "cs" },
-	init_options = {
-		AutomaticWorkspaceInit = true,
-	},
-}
-vim.lsp.enable("csharp_ls")
+vim.diagnostic.config({
+	virtual_text = true,
+})
 
 ---@diagnostic disable-next-line: invisible
 for name, _ in pairs(vim.lsp.config._configs) do
