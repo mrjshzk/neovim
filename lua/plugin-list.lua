@@ -11,4 +11,4 @@ vim.pack.add({
 	"https://github.com/datsfilipe/vesper.nvim.git",
 })
 
-vim.cmd("colorscheme vesper")
+vim.cmd("colorscheme carbonfox")
